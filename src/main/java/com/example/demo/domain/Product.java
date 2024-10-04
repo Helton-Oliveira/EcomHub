@@ -4,7 +4,7 @@ import com.example.demo.domain.component.Category;
 
 import java.util.UUID;
 
-public class Product {
+public abstract class Product {
     private UUID id;
     private String name;
     private String price;
