@@ -9,7 +9,25 @@ public abstract class Product {
     private String name;
     private String price;
     private String description;
+    private String fileSize;
+    private String fileFormat;
     private Category category;
+
+    public String getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(String fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public String getFileFormat() {
+        return fileFormat;
+    }
+
+    public void setFileFormat(String fileFormat) {
+        this.fileFormat = fileFormat;
+    }
 
     public UUID getId() {
         return id;

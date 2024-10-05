@@ -5,7 +5,7 @@ import com.example.demo.domain.factory.products.PhysicalProduct;
 
 import java.util.Optional;
 
-public class PhysicalProductFactory implements ProductFactory{
+public class PhysicalProductFactory extends ProductFactory{
     @Override
     public IProduct createProduct() {
         return new PhysicalProduct();
