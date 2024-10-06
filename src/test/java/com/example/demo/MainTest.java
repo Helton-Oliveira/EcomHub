@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.domain.component.Category;
-import com.example.demo.domain.factory.ProductFactory;
+import com.example.demo.component.Category;
+import com.example.demo.factory.ProductFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class MainTest {
     @Test
     @DisplayName("Deve criar um produto")
     void createProduct() {
-        var factory =  ProductFactory.getFactory("ePUB, PDF", "2GB");
+        var factory =  ProductFactory.getFactory("digital");
         var product = factory.createProduct();
         product.create("Design Patterns", "ebook sobre padroes de projeto", "140,00", "2GB", "ePUB, PDF");
 

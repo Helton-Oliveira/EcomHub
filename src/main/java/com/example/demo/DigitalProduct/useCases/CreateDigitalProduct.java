@@ -1,12 +1,12 @@
-package com.example.demo.useCases;
+package com.example.demo.DigitalProduct.useCases;
 
-import com.example.demo.domain.factory.ProductFactory;
+import com.example.demo.factory.ProductFactory;
 
-public class Creator implements ICreator{
+public class CreateDigitalProduct implements ICreateDigitalProduct{
 
     @Override
     public void execute(String name, String description, String price, String fileFormat, String fileSize) {
-        var factory = ProductFactory.getFactory(fileFormat, fileSize);
+        var factory = ProductFactory.getFactory("digital");
         var product = factory.createProduct();
         product.create(name, description, price, fileSize, fileFormat);
     }

@@ -1,4 +1,4 @@
-package com.example.demo.domain.factory.products;
+package com.example.demo.factory.products;
 
 import com.example.demo.domain.Product;
 

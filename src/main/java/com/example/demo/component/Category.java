@@ -1,4 +1,4 @@
-package com.example.demo.domain.component;
+package com.example.demo.component;
 
 public enum Category {
     DIGITAL,

@@ -1,7 +1,8 @@
-package com.example.demo.domain.factory.products;
+package com.example.demo.DigitalProduct.domain;
 
+import com.example.demo.component.Category;
 import com.example.demo.domain.Product;
-import com.example.demo.domain.component.Category;
+import com.example.demo.factory.products.IProduct;
 
 import java.util.UUID;
 
