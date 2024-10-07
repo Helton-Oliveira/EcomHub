@@ -15,7 +15,7 @@ public class PhysicalProduct extends Product implements IProduct {
         this.setId(UUID.randomUUID());
         this.setName(attributes.get("name"));
         this.setDescription(attributes.get("description"));
-        this.setPrice(attributes.get("price"));
+        this.setPriceInCents(attributes.get("price"));
         this.setQuantity(Integer.parseInt(attributes.get("quantity")));
         this.setCategory(Category.PHYSICAL);
     }

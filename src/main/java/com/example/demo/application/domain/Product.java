@@ -7,7 +7,7 @@ import java.util.UUID;
 public abstract class Product {
     private UUID id;
     private String name;
-    private String price;
+    private Integer priceInCents;
     private String description;
     private String fileSize;
     private String fileFormat;
@@ -45,12 +45,12 @@ public abstract class Product {
         this.name = name;
     }
 
-    public String getPrice() {
-        return price;
+    public Integer getPriceInCents() {
+        return priceInCents;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPriceInCents(String priceInCents) {
+        this.priceInCents = Integer.parseInt(priceInCents.replace(",", "")) * 100;
     }
 
     public String getDescription() {

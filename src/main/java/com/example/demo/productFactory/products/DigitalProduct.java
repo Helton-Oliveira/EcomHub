@@ -15,7 +15,7 @@ public class DigitalProduct extends Product implements IProduct {
         this.setDescription(attributes.get("description"));
         this.setFileSize(attributes.get("fileSize"));
         this.setFileFormat(attributes.get("fileFormat"));
-        this.setPrice(attributes.get("price"));
+        this.setPriceInCents(attributes.get("price"));
         this.setCategory(Category.DIGITAL);
     }
 
