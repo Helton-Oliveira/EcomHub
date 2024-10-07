@@ -1,7 +1,7 @@
 package com.example.demo.application.useCases;
 
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
-import com.example.demo.productFactory.factories.ProductFactory;
+import com.example.demo.application.productFactory.factories.ProductFactory;
 
 import java.util.Map;
 

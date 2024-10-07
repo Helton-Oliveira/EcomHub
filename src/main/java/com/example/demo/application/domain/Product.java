@@ -1,6 +1,6 @@
 package com.example.demo.application.domain;
 
-import com.example.demo.component.Category;
+import com.example.demo.application.domain.component.Category;
 
 import java.util.UUID;
 

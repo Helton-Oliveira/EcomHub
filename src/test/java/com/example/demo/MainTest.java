@@ -3,8 +3,8 @@ package com.example.demo;
 import com.example.demo.adapter.connection.IConnection;
 import com.example.demo.adapter.connection.PostgreSQLAdapter;
 import com.example.demo.application.useCases.CreateProduct;
-import com.example.demo.component.Category;
-import com.example.demo.productFactory.factories.ProductFactory;
+import com.example.demo.application.domain.component.Category;
+import com.example.demo.application.productFactory.factories.ProductFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
