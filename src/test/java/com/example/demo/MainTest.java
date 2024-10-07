@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.example.demo.adapter.connection.IConnection;
+import com.example.demo.adapter.connection.PostgreSQLAdapter;
+import com.example.demo.application.useCases.CreateProduct;
 import com.example.demo.component.Category;
 import com.example.demo.productFactory.factories.ProductFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -55,4 +58,22 @@ public class MainTest {
         assertThat(instance.getName()).isEqualTo("Design Patterns");
         assertThat(instance.getCategory()).isEqualTo(Category.PHYSICAL);
     }
+
+    @Test
+    @DisplayName("Deve criar um produto digital no database")
+    void createProductDigitalOnDatabase() {
+
+        Map<String, String> digitalProduct = new HashMap<>();
+
+        digitalProduct.put("name", "Design Patterns");
+        digitalProduct.put("description", "ebook sobre padroes de projeto");
+        digitalProduct.put("price", "69,90");
+        digitalProduct.put("fileSize", "130KB");
+        digitalProduct.put("fileFormat", "ePUB, PDF");
+
+        IConnection connection = new PostgreSQLAdapter();
+        var create = new CreateProduct();
+        create.execute(digitalProduct);
+    }
+
 }
