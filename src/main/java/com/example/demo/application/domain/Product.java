@@ -9,25 +9,7 @@ public abstract class Product {
     private String name;
     private Integer priceInCents;
     private String description;
-    private String fileSize;
-    private String fileFormat;
     private Category category;
-
-    public String getFileSize() {
-        return fileSize;
-    }
-
-    public void setFileSize(String fileSize) {
-        this.fileSize = fileSize;
-    }
-
-    public String getFileFormat() {
-        return fileFormat;
-    }
-
-    public void setFileFormat(String fileFormat) {
-        this.fileFormat = fileFormat;
-    }
 
     public UUID getId() {
         return id;
@@ -50,7 +32,8 @@ public abstract class Product {
     }
 
     public void setPriceInCents(String priceInCents) {
-        this.priceInCents = Integer.parseInt(priceInCents.replace(",", "")) * 100;
+        var doubleValue = Double.parseDouble(priceInCents.trim().replace(",", ".")) * 100;
+        this.priceInCents = (int) Math.round(doubleValue);
     }
 
     public String getDescription() {

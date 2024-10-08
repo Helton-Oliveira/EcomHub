@@ -1,7 +1,7 @@
 package com.example.demo.infra.repositorFactory.products;
 
 import com.example.demo.adapter.connection.IConnection;
-import com.example.demo.application.domain.Product;
+import com.example.demo.adapter.dto.OutputProductDTO;
 
 public class PhysicalProductDatabase implements IRepository{
 
@@ -12,12 +12,12 @@ public class PhysicalProductDatabase implements IRepository{
     }
 
     @Override
-    public Boolean save(Product product) {
+    public Boolean save(OutputProductDTO product) {
         return true;
     }
 
     @Override
-    public Product getProduct() {
+    public OutputProductDTO getProduct() {
         return null;
     }
 }

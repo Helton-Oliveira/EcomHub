@@ -1,10 +1,8 @@
 package com.example.demo;
 
-import com.example.demo.adapter.connection.IConnection;
-import com.example.demo.adapter.connection.PostgreSQLAdapter;
-import com.example.demo.application.useCases.CreateProduct;
 import com.example.demo.application.domain.component.Category;
 import com.example.demo.application.productFactory.factories.ProductFactory;
+import com.example.demo.application.useCases.CreateProduct;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +31,10 @@ public class MainTest {
 
        var instance = product.get();
 
-       assertThat(instance.getName()).isEqualTo("Design Patterns");
-       assertThat(instance.getCategory()).isEqualTo(Category.DIGITAL);
+        System.out.println(instance.getAttribute("category"));
+
+       assertThat(instance.getAttribute("name")).isEqualTo("Design Patterns");
+       assertThat(instance.getAttribute("category")).isEqualTo(Category.DIGITAL.name());
     }
 
     @Test
@@ -54,9 +54,9 @@ public class MainTest {
 
         var instance = product.get();
 
-        assertThat(instance.getId()).isNotNull();
-        assertThat(instance.getName()).isEqualTo("Design Patterns");
-        assertThat(instance.getCategory()).isEqualTo(Category.PHYSICAL);
+        assertThat(instance.getAttribute("id")).isNotNull();
+        assertThat(instance.getAttribute("name")).isEqualTo("Design Patterns");
+        assertThat(instance.getAttribute("category")).isEqualTo(Category.PHYSICAL.name());
     }
 
     @Test
@@ -65,13 +65,12 @@ public class MainTest {
 
         Map<String, String> digitalProduct = new HashMap<>();
 
-        digitalProduct.put("name", "Design Patterns");
-        digitalProduct.put("description", "ebook sobre padroes de projeto");
-        digitalProduct.put("price", "69,90");
-        digitalProduct.put("fileSize", "130KB");
+        digitalProduct.put("name", "O mundo de sofia");
+        digitalProduct.put("description", "livro sobre filosofia");
+        digitalProduct.put("price", "80,00");
+        digitalProduct.put("fileSize", "100KB");
         digitalProduct.put("fileFormat", "ePUB, PDF");
 
-        IConnection connection = new PostgreSQLAdapter();
         var create = new CreateProduct();
         create.execute(digitalProduct);
     }

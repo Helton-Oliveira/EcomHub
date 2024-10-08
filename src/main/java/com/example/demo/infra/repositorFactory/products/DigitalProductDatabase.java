@@ -1,10 +1,11 @@
 package com.example.demo.infra.repositorFactory.products;
 
 import com.example.demo.adapter.connection.IConnection;
-import com.example.demo.application.domain.Product;
+import com.example.demo.adapter.dto.OutputProductDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class DigitalProductDatabase implements IRepository{
 
@@ -15,7 +16,7 @@ public class DigitalProductDatabase implements IRepository{
     }
 
     @Override
-    public Boolean save(Product product) {
+    public Boolean save(OutputProductDTO product) {
         try {
             var st = connection.query("INSERT INTO digital_products (id, name, description, price_in_cents, file_format, file_size, category) VALUES (?, ?, ?, ?, ?, ?, ?)");
             buildInsertion(st, product);
@@ -31,17 +32,17 @@ public class DigitalProductDatabase implements IRepository{
     }
 
     @Override
-    public Product getProduct() {
+    public OutputProductDTO getProduct() {
         return null;
     }
 
-    private void buildInsertion(PreparedStatement st, Product product) throws SQLException {
-        st.setObject(1, product.getId());
-        st.setString(2, product.getName());
-        st.setString(3, product.getDescription());
-        st.setInt(4, product.getPriceInCents());
-        st.setString(5, product.getFileFormat());
-        st.setString(6, product.getFileSize());
-        st.setString(7, String.valueOf(product.getCategory()));
+    private void buildInsertion(PreparedStatement st, OutputProductDTO product) throws SQLException {
+        st.setObject(1, UUID.fromString(product.getAttribute("id")));
+        st.setString(2, product.getAttribute("name"));
+        st.setString(3, product.getAttribute("description"));
+        st.setInt(4, Integer.parseInt(product.getAttribute("priceInCents")));
+        st.setString(5, product.getAttribute("fileFormat"));
+        st.setString(6, product.getAttribute("fileSize"));
+        st.setString(7, product.getAttribute("category"));
     }
 }
