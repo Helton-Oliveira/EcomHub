@@ -3,6 +3,8 @@ package com.example.demo.infra.repositorFactory.products;
 import com.example.demo.adapter.connection.IConnection;
 import com.example.demo.adapter.dto.OutputProductDTO;
 
+import java.util.UUID;
+
 public class PhysicalProductDatabase implements IRepository{
 
     private final IConnection connection;
@@ -17,7 +19,7 @@ public class PhysicalProductDatabase implements IRepository{
     }
 
     @Override
-    public OutputProductDTO getProduct() {
+    public OutputProductDTO getProduct(UUID id) {
         return null;
     }
 }

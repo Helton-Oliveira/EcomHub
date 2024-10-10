@@ -8,12 +8,12 @@ public abstract class RepositoryFactory {
 
     public abstract IRepository createRepository();
 
-    public static RepositoryFactory getRepository(OutputProductDTO product) {
-        if(product.getAttribute("category").equals(Category.DIGITAL.name())) {
+    public static RepositoryFactory getRepository(String category) {
+        if(category.equalsIgnoreCase(Category.DIGITAL.name())) {
             return new DigitalProductFactory();
         }
 
-        if(product.getAttribute("category").equals(Category.PHYSICAL.name())) {
+        if(category.equalsIgnoreCase(Category.PHYSICAL.name())) {
             return new PhysicalProductFactory();
         }
 

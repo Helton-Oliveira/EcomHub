@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.application.domain.component.Category;
 import com.example.demo.application.productFactory.factories.ProductFactory;
 import com.example.demo.application.useCases.CreateProduct;
+import com.example.demo.application.useCases.GetProduct;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -65,14 +66,25 @@ public class MainTest {
 
         Map<String, String> digitalProduct = new HashMap<>();
 
-        digitalProduct.put("name", "O mundo de sofia");
-        digitalProduct.put("description", "livro sobre filosofia");
-        digitalProduct.put("price", "80,00");
-        digitalProduct.put("fileSize", "100KB");
+        digitalProduct.put("name", "Duna");
+        digitalProduct.put("description", "livro sobre deserto");
+        digitalProduct.put("price", "40,00");
+        digitalProduct.put("fileSize", "470KB");
         digitalProduct.put("fileFormat", "ePUB, PDF");
 
         var create = new CreateProduct();
         create.execute(digitalProduct);
+    }
+
+    @Test
+    @DisplayName("deve recuperar um produto digital")
+    void getDigitalProduct() {
+
+        var product = new GetProduct();
+
+        var output = product.execute("0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
+
+        assertThat(output.getAttribute("name")).isEqualTo("Design Patterns");
     }
 
 }

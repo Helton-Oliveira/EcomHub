@@ -15,7 +15,7 @@ public class CreateProduct implements ICreateProduct {
         product.create(attributes);
 
         // switch repository
-        var repository = RepositoryFactory.getRepository(product.get())
+        var repository = RepositoryFactory.getRepository(product.get().getAttribute("category"))
                 .createRepository();
         repository.save(product.get());
     }
