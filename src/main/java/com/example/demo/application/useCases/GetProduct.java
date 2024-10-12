@@ -7,11 +7,15 @@ import java.util.UUID;
 
 public class GetProduct implements IGetProduct{
 
+    private final RepositoryFactory repositoryFactory;
+
+    public GetProduct(RepositoryFactory repositoryFactory) {
+        this.repositoryFactory = repositoryFactory;
+    }
+
     @Override
     public OutputProductDTO execute(String id, String category) {
-        var factory = RepositoryFactory.getRepository(category);
-        var repository = factory.createRepository();
-
+        var repository = repositoryFactory.createRepository(category);
         return repository.getProduct(UUID.fromString(id));
     }
 }

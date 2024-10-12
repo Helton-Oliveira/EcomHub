@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class DigitalProductDatabase implements IRepository{
+public class DigitalProductDatabase implements IRepository {
 
     private final IConnection connection;
     private final ICreateDTO createDTO;

@@ -1,6 +1,7 @@
 package com.example.demo.infra.repositorFactory.products;
 
 import com.example.demo.adapter.connection.IConnection;
+import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.adapter.dto.OutputProductDTO;
 
 import java.util.UUID;
@@ -8,9 +9,11 @@ import java.util.UUID;
 public class PhysicalProductDatabase implements IRepository{
 
     private final IConnection connection;
+    private final ICreateDTO createDTO;
 
-    public PhysicalProductDatabase(IConnection connection) {
+    public PhysicalProductDatabase(IConnection connection, ICreateDTO createDTO) {
         this.connection = connection;
+        this.createDTO = createDTO;
     }
 
     @Override
