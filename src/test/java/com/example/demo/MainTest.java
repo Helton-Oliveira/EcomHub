@@ -7,6 +7,7 @@ import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.application.productFactory.factories.DigitalProductFactory;
 import com.example.demo.application.productFactory.factories.ProductFactory;
 import com.example.demo.application.useCases.CreateProduct;
+import com.example.demo.application.useCases.DeleteProduct;
 import com.example.demo.application.useCases.GetProduct;
 import com.example.demo.infra.repositorFactory.factories.DigitalProductRepositoryFactory;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
@@ -26,10 +27,10 @@ public class MainTest {
 
         Map<String, String> digitalProduct = new HashMap<>();
 
-        digitalProduct.put("name", "Rapido e Devagar");
-        digitalProduct.put("description", "livro sobre psicologia");
-        digitalProduct.put("price", "140,00");
-        digitalProduct.put("fileSize", "470KB");
+        digitalProduct.put("name", "Refactor");
+        digitalProduct.put("description", "livro sobre refatoracao");
+        digitalProduct.put("price", "200,00");
+        digitalProduct.put("fileSize", "2GB");
         digitalProduct.put("fileFormat", "ePUB, PDF");
 
         IConnection connection = new PostgreSQLAdapter();
@@ -53,6 +54,19 @@ public class MainTest {
         var output = product.execute("0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
 
         assertThat(output.getAttribute("name")).isEqualTo("Design Patterns");
+    }
+
+    @Test
+    @DisplayName("deve deletar logicamente um produto digital")
+    void mustPerformLogicalDeletion() {
+        IConnection connection = new PostgreSQLAdapter();
+        ICreateDTO createDTO = new CreateDTO();
+        RepositoryFactory repository = new DigitalProductRepositoryFactory(connection, createDTO);
+        var product = new DeleteProduct(repository);
+
+        var output = product.execute("0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
+
+        assertThat(output).isEqualTo("Item de id: 0fb0f619-290d-485c-9dcf-dad15f26fe18 deletado com sucesso!");
     }
 
 }

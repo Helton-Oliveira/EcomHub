@@ -25,6 +25,7 @@ public class PhysicalProduct extends Product implements IProduct {
         this.setPriceInCents(attributes.get("price"));
         this.setQuantity(Integer.parseInt(attributes.get("quantity")));
         this.setCategory(Category.PHYSICAL);
+        this.setActive(true);
     }
 
     @Override
@@ -35,7 +36,8 @@ public class PhysicalProduct extends Product implements IProduct {
                 this.getDescription(),
                 this.getQuantity(),
                 this.getPriceInCents(),
-                this.getCategory()
+                this.getCategory(),
+                this.getActive()
         );
     }
 

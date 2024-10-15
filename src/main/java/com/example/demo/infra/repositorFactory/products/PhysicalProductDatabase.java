@@ -25,4 +25,9 @@ public class PhysicalProductDatabase implements IRepository{
     public OutputProductDTO getProduct(UUID id) {
         return null;
     }
+
+    @Override
+    public Boolean delete(UUID id) {
+        return false;
+    }
 }

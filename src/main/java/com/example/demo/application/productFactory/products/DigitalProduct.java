@@ -28,6 +28,7 @@ public class DigitalProduct extends Product implements IProduct {
         this.setFileFormat(attributes.get("fileFormat"));
         this.setPriceInCents(attributes.get("price"));
         this.setCategory(Category.DIGITAL);
+        this.setActive(true);
     }
 
     @Override
@@ -39,7 +40,8 @@ public class DigitalProduct extends Product implements IProduct {
                 this.getFileSize(),
                 this.getFileFormat(),
                 this.getPriceInCents(),
-                this.getCategory());
+                this.getCategory(),
+                this.getActive());
     }
 
     public String getFileSize() {

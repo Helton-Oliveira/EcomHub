@@ -10,6 +10,15 @@ public abstract class Product {
     private Integer priceInCents;
     private String description;
     private Category category;
+    private Boolean active;
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public UUID getId() {
         return id;

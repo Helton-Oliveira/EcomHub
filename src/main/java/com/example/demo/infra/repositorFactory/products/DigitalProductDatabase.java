@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+import java.lang.*;
+
 
 public class DigitalProductDatabase implements IRepository {
 
@@ -23,7 +25,7 @@ public class DigitalProductDatabase implements IRepository {
     @Override
     public Boolean save(OutputProductDTO product) {
         try {
-            var st = connection.query("INSERT INTO digital_products (id, name, description, price_in_cents, file_format, file_size, category) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            var st = connection.query("INSERT INTO digital_products (id, name, description, price_in_cents, file_format, file_size, category, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             buildInsertion(st, product);
             var result = st.executeUpdate();
             if(result != 0) {
@@ -53,6 +55,25 @@ public class DigitalProductDatabase implements IRepository {
         return null;
     }
 
+    @Override
+    public Boolean delete(UUID id) {
+        try {
+            var st = connection.query("UPDATE digital_products SET active = ? WHERE id = ?");
+            st.setBoolean(1, false);
+            st.setObject(2, id);
+            var update = st.executeUpdate();
+
+            if (update < 1) {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return true;
+    }
+
     private void buildInsertion(PreparedStatement st, OutputProductDTO product) throws SQLException {
         st.setObject(1, UUID.fromString(product.getAttribute("id")));
         st.setString(2, product.getAttribute("name"));
@@ -61,6 +82,7 @@ public class DigitalProductDatabase implements IRepository {
         st.setString(5, product.getAttribute("fileFormat"));
         st.setString(6, product.getAttribute("fileSize"));
         st.setString(7, product.getAttribute("category"));
+        st.setBoolean(8, Boolean.parseBoolean(product.getAttribute("active")));
     }
 
     private OutputProductDTO reBuild(ResultSet st) throws SQLException {
@@ -71,7 +93,8 @@ public class DigitalProductDatabase implements IRepository {
                 st.getString("file_size"),
                 st.getString("file_format"),
                 st.getInt("price_in_cents"),
-                Category.valueOf(st.getString("category"))
+                Category.valueOf(st.getString("category")),
+                st.getBoolean("active")
         );
     }
 }
