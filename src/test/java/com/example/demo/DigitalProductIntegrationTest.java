@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MainTest {
+public class DigitalProductIntegrationTest {
 
     @Test
     @DisplayName("Deve criar um produto digital no database")
