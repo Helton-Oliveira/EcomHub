@@ -8,6 +8,7 @@ import com.example.demo.application.productFactory.factories.DigitalProductFacto
 import com.example.demo.application.productFactory.factories.ProductFactory;
 import com.example.demo.application.useCases.CreateProduct;
 import com.example.demo.application.useCases.DeleteProduct;
+import com.example.demo.application.useCases.GetAllProducts;
 import com.example.demo.application.useCases.GetProduct;
 import com.example.demo.infra.repositorFactory.factories.DigitalProductRepositoryFactory;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
@@ -54,6 +55,22 @@ public class MainTest {
         var output = product.execute("0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
 
         assertThat(output.getAttribute("name")).isEqualTo("Design Patterns");
+    }
+
+
+    @Test
+    @DisplayName("deve recuperar todos os produtos digitais ativos")
+    void getAllActiveDigitalProducts() {
+
+        IConnection connection = new PostgreSQLAdapter();
+        ICreateDTO createDTO = new CreateDTO();
+        RepositoryFactory repository = new DigitalProductRepositoryFactory(connection, createDTO);
+        var product = new GetAllProducts(repository);
+
+        var output = product.execute("digital");
+
+        assertThat(output).isNotEmpty();
+        output.forEach(p -> assertThat(p.getAttribute("active")).isEqualTo("true"));
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.example.demo.adapter.connection.IConnection;
 import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.adapter.dto.OutputProductDTO;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PhysicalProductDatabase implements IRepository{
@@ -24,6 +25,11 @@ public class PhysicalProductDatabase implements IRepository{
     @Override
     public OutputProductDTO getProduct(UUID id) {
         return null;
+    }
+
+    @Override
+    public List<OutputProductDTO> getAll() {
+        return List.of();
     }
 
     @Override

@@ -8,6 +8,8 @@ import com.example.demo.application.domain.component.Category;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.lang.*;
 
@@ -53,6 +55,24 @@ public class DigitalProductDatabase implements IRepository {
             e.getMessage();
         }
         return null;
+    }
+
+    @Override
+    public List<OutputProductDTO> getAll() {
+        List<OutputProductDTO> outputProductDTOList = new ArrayList<>();
+        try {
+            var st = connection.query("SELECT * FROM digital_products WHERE active IN ('TRUE')");
+            var result = st.executeQuery();
+
+            while (result.next()) {
+                outputProductDTOList.add(reBuild(result));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return outputProductDTOList;
     }
 
     @Override
