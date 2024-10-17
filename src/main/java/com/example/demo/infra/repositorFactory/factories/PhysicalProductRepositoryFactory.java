@@ -4,6 +4,7 @@ import com.example.demo.adapter.connection.IConnection;
 import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.application.domain.component.Category;
 import com.example.demo.infra.repositorFactory.products.IRepository;
+import com.example.demo.infra.repositorFactory.products.IRepositoryUpdateMethod;
 import com.example.demo.infra.repositorFactory.products.PhysicalProductDatabase;
 
 public class PhysicalProductRepositoryFactory implements RepositoryFactory {
@@ -16,7 +17,7 @@ public class PhysicalProductRepositoryFactory implements RepositoryFactory {
         this.createDTO = createDTO;
     }
     @Override
-    public IRepository createRepository(String category) {
+    public IRepositoryUpdateMethod createRepository(String category) {
         if(category.equalsIgnoreCase(Category.PHYSICAL.name())) {
             return new PhysicalProductDatabase(connection, createDTO);
         }

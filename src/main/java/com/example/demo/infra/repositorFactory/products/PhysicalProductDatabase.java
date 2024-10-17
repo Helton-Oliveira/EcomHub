@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PhysicalProductDatabase implements IRepository{
+public class PhysicalProductDatabase implements IRepositoryUpdateMethod{
 
     private final IConnection connection;
     private final ICreateDTO createDTO;
@@ -75,16 +75,35 @@ public class PhysicalProductDatabase implements IRepository{
     }
 
     @Override
-    public Boolean delete(UUID id) {
+    public Boolean update(UUID id, Integer quantity) {
         try {
-            var st = connection.query("UPDATE physical_products SET active = ? WHERE id = ?");
-            st.setObject(1, false);
+            var st = connection.query("UPDATE physical_products SET quantity = quantity - ? WHERE id = ?");
+            st.setInt(1, quantity);
             st.setObject(2, id);
             var result = st.executeUpdate();
 
             if (result == 0) {
                 return false;
             }
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean delete(UUID id) {
+        try {
+            var st = connection.query("UPDATE physical_products SET active = ? WHERE id = ?");
+            st.setBoolean(1, false);
+            st.setObject(2, id);
+            var result = st.executeUpdate();
+
+            if (result == 0) {
+                return false;
+            }
+            connection.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

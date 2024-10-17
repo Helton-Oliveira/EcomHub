@@ -7,6 +7,8 @@ import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.application.productFactory.factories.PhysicalProductFactory;
 import com.example.demo.application.productFactory.factories.ProductFactory;
 import com.example.demo.application.useCases.*;
+import com.example.demo.application.useCases.statePattern.DecrementPhysicalProductStockProductState;
+import com.example.demo.application.useCases.statePattern.IProductState;
 import com.example.demo.infra.repositorFactory.factories.PhysicalProductRepositoryFactory;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -69,15 +71,26 @@ public class PhysicalProductIntegrationTest {
     }
 
     @Test
-    @DisplayName("deve deletar logicamente um produto digital")
+    @DisplayName("deve decrementar 1 na quantidade em estoque do produto")
+    void mustPerformLogicalQuantityDeletion() {
+        IConnection connection = new PostgreSQLAdapter();
+        ICreateDTO createDTO = new CreateDTO();
+        RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
+        var product = new DeleteProduct(repository, "621e00dd-b57a-47b0-99b8-1b84048a9c0d", "physical");
+        var output = product.execute();
+
+        assertThat(output).isEqualTo("Sucesso");
+    }
+
+    @Test
+    @DisplayName("deve decrementar inativar produto com quantidade igual a zero")
     void mustPerformLogicalDeletion() {
         IConnection connection = new PostgreSQLAdapter();
         ICreateDTO createDTO = new CreateDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
-        var product = new DeleteProduct(repository);
+        var product = new DeleteProduct(repository, "300ec860-8d7f-403d-8c88-0388812b4ae6", "physical");
+        var output = product.execute();
 
-        var output = product.execute("300ec860-8d7f-403d-8c88-0388812b4ae6", "physical");
-
-        assertThat(output).isEqualTo("Item de id: 300ec860-8d7f-403d-8c88-0388812b4ae6 deletado com sucesso!");
+        assertThat(output).isEqualTo("PRODUTO INATIVADO COM SUCESSO");
     }
 }

@@ -79,11 +79,10 @@ public class DigitalProductIntegrationTest {
         IConnection connection = new PostgreSQLAdapter();
         ICreateDTO createDTO = new CreateDTO();
         RepositoryFactory repository = new DigitalProductRepositoryFactory(connection, createDTO);
-        var product = new DeleteProduct(repository);
+        var product = new DeleteProduct(repository, "0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
+        var output = product.execute();
 
-        var output = product.execute("0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
-
-        assertThat(output).isEqualTo("Item de id: 0fb0f619-290d-485c-9dcf-dad15f26fe18 deletado com sucesso!");
+        assertThat(output).isEqualTo("PRODUTO COM ID: 0fb0f619-290d-485c-9dcf-dad15f26fe18 DESATIVADO COM SUCESSO!");
     }
 
 }

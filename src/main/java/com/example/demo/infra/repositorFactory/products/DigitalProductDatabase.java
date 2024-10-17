@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.UUID;
 import java.lang.*;
 
-
 public class DigitalProductDatabase implements IRepository {
 
     private final IConnection connection;
