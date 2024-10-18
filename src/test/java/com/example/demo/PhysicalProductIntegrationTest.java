@@ -6,9 +6,13 @@ import com.example.demo.adapter.dto.CreateDTO;
 import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.application.productFactory.factories.PhysicalProductFactory;
 import com.example.demo.application.productFactory.factories.ProductFactory;
-import com.example.demo.application.useCases.*;
-import com.example.demo.application.useCases.statePattern.DecrementPhysicalProductStockProductState;
-import com.example.demo.application.useCases.statePattern.IProductState;
+import com.example.demo.application.useCases.abstractions.ICreateProduct;
+import com.example.demo.application.useCases.chainOfResponsability.baseHandler.IProductHandler;
+import com.example.demo.application.useCases.chainOfResponsability.baseHandler.StartProductDeactivationHandler;
+import com.example.demo.application.useCases.concreteUseCases.CreateProduct;
+import com.example.demo.application.useCases.concreteUseCases.DeactivateProduct;
+import com.example.demo.application.useCases.concreteUseCases.GetAllProducts;
+import com.example.demo.application.useCases.concreteUseCases.GetProduct;
 import com.example.demo.infra.repositorFactory.factories.PhysicalProductRepositoryFactory;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -76,10 +80,11 @@ public class PhysicalProductIntegrationTest {
         IConnection connection = new PostgreSQLAdapter();
         ICreateDTO createDTO = new CreateDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
-        var product = new DeleteProduct(repository, "621e00dd-b57a-47b0-99b8-1b84048a9c0d", "physical");
-        var output = product.execute();
+        IProductHandler chain = new StartProductDeactivationHandler();
+        var product = new DeactivateProduct(repository, chain);
+        var output = product.execute("621e00dd-b57a-47b0-99b8-1b84048a9c0d");
 
-        assertThat(output).isEqualTo("Sucesso");
+        assertThat(output).isEqualTo("ITEM DECREMENTADO COM SUCESSO");
     }
 
     @Test
@@ -88,9 +93,10 @@ public class PhysicalProductIntegrationTest {
         IConnection connection = new PostgreSQLAdapter();
         ICreateDTO createDTO = new CreateDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
-        var product = new DeleteProduct(repository, "300ec860-8d7f-403d-8c88-0388812b4ae6", "physical");
-        var output = product.execute();
+        IProductHandler chain = new StartProductDeactivationHandler();
+        var product = new DeactivateProduct(repository, chain);
+        var output = product.execute("300ec860-8d7f-403d-8c88-0388812b4ae6");
 
-        assertThat(output).isEqualTo("PRODUTO INATIVADO COM SUCESSO");
+        assertThat(output).isEqualTo("ITEM DE ID: 300ec860-8d7f-403d-8c88-0388812b4ae6 INATIVADO COM SUCESSO");
     }
 }

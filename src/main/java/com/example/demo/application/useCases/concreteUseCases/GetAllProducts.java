@@ -1,12 +1,12 @@
-package com.example.demo.application.useCases;
+package com.example.demo.application.useCases.concreteUseCases;
 
 import com.example.demo.adapter.dto.OutputProductDTO;
+import com.example.demo.application.useCases.abstractions.IGetAllProducts;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
 
 import java.util.List;
-import java.util.concurrent.RunnableScheduledFuture;
 
-public class GetAllProducts implements IGetAllProducts{
+public class GetAllProducts implements IGetAllProducts {
 
     private final RepositoryFactory factory;
 

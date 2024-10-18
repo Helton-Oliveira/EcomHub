@@ -1,5 +1,6 @@
-package com.example.demo.application.useCases;
+package com.example.demo.application.useCases.concreteUseCases;
 
+import com.example.demo.application.useCases.abstractions.ICreateProduct;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
 import com.example.demo.application.productFactory.factories.ProductFactory;
 

@@ -6,10 +6,12 @@ import com.example.demo.adapter.dto.CreateDTO;
 import com.example.demo.adapter.dto.ICreateDTO;
 import com.example.demo.application.productFactory.factories.DigitalProductFactory;
 import com.example.demo.application.productFactory.factories.ProductFactory;
-import com.example.demo.application.useCases.CreateProduct;
-import com.example.demo.application.useCases.DeleteProduct;
-import com.example.demo.application.useCases.GetAllProducts;
-import com.example.demo.application.useCases.GetProduct;
+import com.example.demo.application.useCases.concreteUseCases.CreateProduct;
+import com.example.demo.application.useCases.concreteUseCases.DeactivateProduct;
+import com.example.demo.application.useCases.concreteUseCases.GetAllProducts;
+import com.example.demo.application.useCases.concreteUseCases.GetProduct;
+import com.example.demo.application.useCases.chainOfResponsability.baseHandler.IProductHandler;
+import com.example.demo.application.useCases.chainOfResponsability.baseHandler.StartProductDeactivationHandler;
 import com.example.demo.infra.repositorFactory.factories.DigitalProductRepositoryFactory;
 import com.example.demo.infra.repositorFactory.factories.RepositoryFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -79,10 +81,11 @@ public class DigitalProductIntegrationTest {
         IConnection connection = new PostgreSQLAdapter();
         ICreateDTO createDTO = new CreateDTO();
         RepositoryFactory repository = new DigitalProductRepositoryFactory(connection, createDTO);
-        var product = new DeleteProduct(repository, "0fb0f619-290d-485c-9dcf-dad15f26fe18", "digital");
-        var output = product.execute();
+        IProductHandler chain = new StartProductDeactivationHandler();
+        var delete = new DeactivateProduct(repository, chain);
+        var output = delete.execute("0fb0f619-290d-485c-9dcf-dad15f26fe18");
 
-        assertThat(output).isEqualTo("PRODUTO COM ID: 0fb0f619-290d-485c-9dcf-dad15f26fe18 DESATIVADO COM SUCESSO!");
+        assertThat(output).isEqualTo("ITEM DE ID: 0fb0f619-290d-485c-9dcf-dad15f26fe18 DESATIVADO COM SUCESSO!");
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.demo.application.useCases;
+package com.example.demo.application.useCases.abstractions;
 
 import java.util.Map;
 
