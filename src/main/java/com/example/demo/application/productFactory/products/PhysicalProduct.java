@@ -1,6 +1,6 @@
 package com.example.demo.application.productFactory.products;
 
-import com.example.demo.adapter.dto.ICreateDTO;
+import com.example.demo.adapter.dto.ICreateOutputDTO;
 import com.example.demo.adapter.dto.OutputProductDTO;
 import com.example.demo.application.domain.component.Category;
 import com.example.demo.application.domain.Product;
@@ -11,9 +11,9 @@ import java.util.UUID;
 public class PhysicalProduct extends Product implements IProduct {
 
     private Integer quantity;
-    private final ICreateDTO createDTO;
+    private final ICreateOutputDTO createDTO;
 
-    public PhysicalProduct(ICreateDTO createDTO) {
+    public PhysicalProduct(ICreateOutputDTO createDTO) {
         this.createDTO = createDTO;
     }
 

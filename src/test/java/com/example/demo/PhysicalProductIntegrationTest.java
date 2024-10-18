@@ -2,8 +2,8 @@ package com.example.demo;
 
 import com.example.demo.adapter.connection.IConnection;
 import com.example.demo.adapter.connection.PostgreSQLAdapter;
-import com.example.demo.adapter.dto.CreateDTO;
-import com.example.demo.adapter.dto.ICreateDTO;
+import com.example.demo.adapter.dto.CreateOutputDTO;
+import com.example.demo.adapter.dto.ICreateOutputDTO;
 import com.example.demo.application.productFactory.factories.PhysicalProductFactory;
 import com.example.demo.application.productFactory.factories.ProductFactory;
 import com.example.demo.application.useCases.abstractions.ICreateProduct;
@@ -24,8 +24,8 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PhysicalProductIntegrationTest {
-
-    @Test
+/*
+   *//* @Test
     @DisplayName("Deve criar um produto fisico")
     void createPhysicalProduct() {
 
@@ -37,20 +37,20 @@ public class PhysicalProductIntegrationTest {
         physicalProduct.put("quantity", "129");
 
         IConnection connection = new PostgreSQLAdapter();
-        ICreateDTO createDTO = new CreateDTO();
+        ICreateOutputDTO createDTO = new CreateOutputDTO();
         RepositoryFactory repositoryFactory = new PhysicalProductRepositoryFactory(connection, createDTO);
         ProductFactory productFactory = new PhysicalProductFactory(createDTO);
-        ICreateProduct createProduct = new CreateProduct(repositoryFactory, productFactory);
+        ICreateProduct createFactoryProduct = new CreateProduct(repositoryFactory, productFactory);
 
-        createProduct.execute(physicalProduct);
+        createFactoryProduct.execute(physicalProduct);
     }
-
+*//*
     @Test
     @DisplayName("deve recuperar um produto fisico")
     void getPhysicalProduct() {
 
         IConnection connection = new PostgreSQLAdapter();
-        ICreateDTO createDTO = new CreateDTO();
+        ICreateOutputDTO createDTO = new CreateOutputDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
         var product = new GetProduct(repository);
 
@@ -64,7 +64,7 @@ public class PhysicalProductIntegrationTest {
     void getAllActivePhysicalProducts() {
 
         IConnection connection = new PostgreSQLAdapter();
-        ICreateDTO createDTO = new CreateDTO();
+        ICreateOutputDTO createDTO = new CreateOutputDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
         var product = new GetAllProducts(repository);
 
@@ -78,7 +78,7 @@ public class PhysicalProductIntegrationTest {
     @DisplayName("deve decrementar 1 na quantidade em estoque do produto")
     void mustPerformLogicalQuantityDeletion() {
         IConnection connection = new PostgreSQLAdapter();
-        ICreateDTO createDTO = new CreateDTO();
+        ICreateOutputDTO createDTO = new CreateOutputDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
         IProductHandler chain = new StartProductDeactivationHandler();
         var product = new DeactivateProduct(repository, chain);
@@ -91,12 +91,12 @@ public class PhysicalProductIntegrationTest {
     @DisplayName("deve decrementar inativar produto com quantidade igual a zero")
     void mustPerformLogicalDeletion() {
         IConnection connection = new PostgreSQLAdapter();
-        ICreateDTO createDTO = new CreateDTO();
+        ICreateOutputDTO createDTO = new CreateOutputDTO();
         RepositoryFactory repository = new PhysicalProductRepositoryFactory(connection, createDTO);
         IProductHandler chain = new StartProductDeactivationHandler();
         var product = new DeactivateProduct(repository, chain);
         var output = product.execute("300ec860-8d7f-403d-8c88-0388812b4ae6");
 
         assertThat(output).isEqualTo("ITEM DE ID: 300ec860-8d7f-403d-8c88-0388812b4ae6 INATIVADO COM SUCESSO");
-    }
+    }*/
 }

@@ -2,11 +2,14 @@ package com.example.demo.adapter.dto;
 
 import com.example.demo.application.domain.component.Category;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class OutputProductDTO {
+public class OutputProductDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Map<String, String> attributes = new HashMap<>();
 
@@ -33,6 +36,10 @@ public class OutputProductDTO {
 
     public String getAttribute(String attributeName) {
         return this.attributes.get(attributeName);
+    }
+
+    public Map<String, String> getAttributes() {
+        return attributes;
     }
 
 }

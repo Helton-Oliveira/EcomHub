@@ -1,7 +1,7 @@
 package com.example.demo.infra.repositorFactory.products;
 
 import com.example.demo.adapter.connection.IConnection;
-import com.example.demo.adapter.dto.ICreateDTO;
+import com.example.demo.adapter.dto.ICreateOutputDTO;
 import com.example.demo.adapter.dto.OutputProductDTO;
 import com.example.demo.application.domain.component.Category;
 
@@ -17,9 +17,9 @@ import java.lang.*;
 public class DigitalProductDatabase implements IRepository {
 
     private final IConnection connection;
-    private final ICreateDTO createDTO;
+    private final ICreateOutputDTO createDTO;
 
-    public DigitalProductDatabase(IConnection connection, ICreateDTO createDTO) {
+    public DigitalProductDatabase(IConnection connection, ICreateOutputDTO createDTO) {
         this.connection = connection;
         this.createDTO = createDTO;
     }

@@ -1,6 +1,6 @@
 package com.example.demo.application.productFactory.products;
 
-import com.example.demo.adapter.dto.ICreateDTO;
+import com.example.demo.adapter.dto.ICreateOutputDTO;
 import com.example.demo.adapter.dto.OutputProductDTO;
 import com.example.demo.application.domain.component.Category;
 import com.example.demo.application.domain.Product;
@@ -13,9 +13,9 @@ public class DigitalProduct extends Product implements IProduct {
     private String fileSize;
     private String fileFormat;
 
-    private final ICreateDTO createDTO;
+    private final ICreateOutputDTO createDTO;
 
-    public DigitalProduct(ICreateDTO createDTO) {
+    public DigitalProduct(ICreateOutputDTO createDTO) {
         this.createDTO = createDTO;
     }
 
